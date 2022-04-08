@@ -7,7 +7,11 @@
 
 # Germania KG · Fabrics
 
+## Installation
 
+```bash
+$ composer require germania/fabrics "^5.0"
+```
 
 ## Interfaces and classes
 
