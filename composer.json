@@ -1,13 +1,13 @@
 {
-    "name": "germania/fabrics",
-    "description": "Classes for dealing with fabrics",
+    "name": "germania-kg/fabrics",
+    "description": "Classes and interfaces for dealing with fabrics",
 
     "license": "MIT",
 
     "authors": [
         {
             "name":  "Carsten Witt",
-            "email": "carsten.witt@germania-kg.com",
+            "email": "admin@germania-kg.com",
             "role":  "Developer"
         }
     ],
