@@ -1,0 +1,6 @@
+CREATE TABLE `germania_pleatwidths` (
+	`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+	`width` int(11) unsigned NOT NULL COMMENT 'Faltenbreite in mm',
+	`label` varchar(32) NOT NULL DEFAULT '' COMMENT 'Angezeigter Name',
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

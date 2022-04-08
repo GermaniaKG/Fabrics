@@ -1,0 +1,11 @@
+CREATE TABLE `germania_fabrics_pleatwidths` (
+	`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+	`fabric_id` int(11) unsigned NOT NULL COMMENT 'ID des Stoffes (nicht Stoffnummer)',
+	`pleatwidth_id` int(11) unsigned NOT NULL COMMENT 'ID der Faltenbreite,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `unique_fabric_pleatwidth` (`fabric_id`,`pleatwidth_id`),
+	KEY `index_fabric` (`fabric_id`),
+	KEY `germania_fabrics_pleatwidth_ibfk_2` (`pleatwidth_id`),
+	CONSTRAINT `germania_fabrics_pleatwidth_ibfk_1` FOREIGN KEY (`fabric_id`) REFERENCES `germania_fabrics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `germania_fabrics_pleatwidth_ibfk_2` FOREIGN KEY (`pleatwidth_id`) REFERENCES `germania_pleatwidths` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

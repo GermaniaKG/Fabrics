@@ -1,0 +1,10 @@
+CREATE TABLE `germania_fabrics_colors` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `fabric_id` int(11) unsigned NOT NULL,
+  `color_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fabric_id` (`fabric_id`,`color_id`),
+  KEY `color_id` (`color_id`),
+  CONSTRAINT `germania_fabrics_colors_ibfk_1` FOREIGN KEY (`fabric_id`) REFERENCES `germania_fabrics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `germania_fabrics_colors_ibfk_2` FOREIGN KEY (`color_id`) REFERENCES `germania_color_groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=709 DEFAULT CHARSET=utf8;
