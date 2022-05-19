@@ -5,6 +5,8 @@ class PhotoNotEmptyFilterIterator extends \FilterIterator{
 
     public $field = 'photo';
     
+
+    #[\ReturnTypeWillChange]
     public function accept( )
     {
         $fabric = $this->current();
