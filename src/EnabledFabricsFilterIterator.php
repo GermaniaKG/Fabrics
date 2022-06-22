@@ -5,8 +5,7 @@ class EnabledFabricsFilterIterator extends \FilterIterator{
 
     public $field = 'enabled';
 
-    #[\ReturnTypeWillChange]
-    public function accept( )
+    public function accept( ) : bool
     {
         $fabric = $this->current();
 

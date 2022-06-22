@@ -21,8 +21,7 @@ class SimilarTransparencyAndColorFilterIterator extends \FilterIterator{
         parent::__construct( new \IteratorIterator($fabrics));
     }
 
-    #[\ReturnTypeWillChange]
-    public function accept( )
+    public function accept( ) : bool
     {
         $fabric = $this->current();
 
