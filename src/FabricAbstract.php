@@ -4,30 +4,34 @@ namespace Germania\Fabrics;
 abstract class FabricAbstract implements FabricInterface
 {
     public $id;
-
-    public $fabric_number;
-    public $price_group;
     public $enabled;
     public $lieferbar;
 
+    // public $collection_id;
     public $collection_slug;
     public $collection_name;
     public $collection_page;
-    public $fabric_transparency;
-    public $colors;
-    public $fabric_lieferschein_name;
+
     public $keywords;
+    public $price_group;
+    public $fabric_number;
+    public $fabric_transparency;
+    public $fabric_lieferschein_name;
     public $fabric_name;
     public $pattern;
+
+    public $roll_max_width;
     public $fabric_max_width;
+
     public $photo;
     public $in_kompaktkollektion;
+
+    public $pleat_width;
     public $paneltrack;
     public $topar;
     public $dustblock;
-    public $pleat_width;
     public $thickness;
-    public $roll_max_width;
+
     public $material;
     public $weight;
     public $easy_clean;
@@ -42,18 +46,36 @@ abstract class FabricAbstract implements FabricInterface
     public $oekotex;
     public $seatex;
     public $cradle_to_cradle;
+
     public $light_reflection;
     public $light_transmission;
     public $light_absorption;
     public $solar_reflection;
     public $solar_transmission;
     public $solar_absorption;
+
     public $uv_class;
     public $energy_class_summer;
     public $energy_class_winter;
     public $sound_class;
-    public $slat_available_widths;
+
+    public $slat_available_widths; // DEPRECATED
+
+    /**
+     * Pleat widths, comma-separated, e.g. `20,25,32`
+     * @var string|null
+     */
     public $pleat_available_widths;
+
+
+    /**
+     * Assignerd color slugs, space-separated, e.g. `green olive blue`
+     * @var string|null
+     */
+    public $colors;
+
+
+
 
 
     public function getFabricNumber() {

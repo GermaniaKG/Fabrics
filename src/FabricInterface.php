@@ -15,25 +15,33 @@ interface FabricInterface
           'id'
         , 'enabled'
         , 'lieferbar'
+
+        // , 'collection_id'
         , 'collection_slug'
         , 'collection_name'
-        , 'fabric_number'
         , 'collection_page'
-        , 'fabric_transparency'
-        , 'price_group'
-        , 'fabric_lieferschein_name'
+
         , 'keywords'
+        , 'price_group'
+        , 'fabric_number'
+        , 'fabric_transparency'
+        , 'fabric_lieferschein_name'
         , 'fabric_name'
         , 'pattern'
+
+        , 'roll_max_width'
         , 'fabric_max_width'
+
         , 'photo'
+
         , 'in_kompaktkollektion'
+
+        , 'pleat_width'
         , 'paneltrack'
         , 'topar'
         , 'dustblock'
-        , 'pleat_width'
         , 'thickness'
-        , 'roll_max_width'
+
         , 'material'
         , 'weight'
         , 'easy_clean'
@@ -48,16 +56,19 @@ interface FabricInterface
         , 'green_guard'
         , 'seatex'
         , 'cradle_to_cradle'
+
         , 'light_reflection'
         , 'light_transmission'
         , 'light_absorption'
         , 'solar_reflection'
         , 'solar_transmission'
         , 'solar_absorption'
+
         , 'uv_class'
         , 'energy_class_summer'
         , 'energy_class_winter'
         , 'sound_class'
+
         , 'slat_available_widths' // DEPRECATED
     );
 
