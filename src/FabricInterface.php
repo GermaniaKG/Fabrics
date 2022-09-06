@@ -1,9 +1,9 @@
 <?php
+
 namespace Germania\Fabrics;
 
 interface FabricInterface
 {
-
     /**
      * This field names array reflects the database fields.
      * Use like this:
@@ -11,7 +11,7 @@ interface FabricInterface
      *            <?php
      *            $fields = implode(",", FabricInterface::FABRIC_FIELDS);
      */
-    const FABRIC_FIELDS = array(
+    public const FABRIC_FIELDS = array(
           'id'
         , 'enabled'
         , 'lieferbar'
@@ -31,6 +31,10 @@ interface FabricInterface
 
         , 'roll_max_width'
         , 'fabric_max_width'
+
+        , 'repeat_width'
+        , 'repeat_height'
+        , 'repeat_type'
 
         , 'photo'
 
@@ -72,31 +76,33 @@ interface FabricInterface
         , 'slat_available_widths' // DEPRECATED
     );
 
-	public function getFabricNumber();
-	public function getFabricName();
-	public function getPattern();
+    public function getFabricNumber();
+    public function getFabricName();
+    public function getPattern();
     public function getPleatWidth();
 
-	public function getPriceGroup();
-	public function getKeywords();
+    public function getRepeat() : ?RepeatInterface;
 
-	public function isEnabled() : bool;
-	public function isAvailable() : bool;
+    public function getPriceGroup();
+    public function getKeywords();
 
-	public function isInKompaktKollektion() : bool;
-	public function isAvailableForPanelTracks() : bool;
+    public function isEnabled(): bool;
+    public function isAvailable(): bool;
 
-    public function isHalogenFree() : bool;
-    public function isPvcFree() : bool;
-    public function isGreenGuard() : bool;
-    public function isOekoTex() : bool;
-    public function isSeaTex() : bool;
+    public function isInKompaktKollektion(): bool;
+    public function isAvailableForPanelTracks(): bool;
 
-    public function isTopar() : bool;
-	public function isDustblock() : bool;
-	public function isEasyClean() : bool;
-	public function isWashable() : bool;
-	public function isMoistRoom() : bool;
+    public function isHalogenFree(): bool;
+    public function isPvcFree(): bool;
+    public function isGreenGuard(): bool;
+    public function isOekoTex(): bool;
+    public function isSeaTex(): bool;
 
-	public function isScreenSuitable() : bool;
+    public function isTopar(): bool;
+    public function isDustblock(): bool;
+    public function isEasyClean(): bool;
+    public function isWashable(): bool;
+    public function isMoistRoom(): bool;
+
+    public function isScreenSuitable(): bool;
 }

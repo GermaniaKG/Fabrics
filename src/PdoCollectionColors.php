@@ -1,11 +1,10 @@
 <?php
+
 namespace Germania\Fabrics;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Psr\Log\LoggerAwareTrait;
-
-
 
 /**
  * Fetches ALL fabrics (Stoffe) belonging to a certain collection (Kollektion).
@@ -32,9 +31,9 @@ class PdoCollectionColors
      * @param string               $fabrics_colors_table
      * @param LoggerInterface|null $logger
      */
-    public function __construct( \PDO $pdo, string $fabrics_table, string $colors_table, string $fabrics_colors_table, LoggerInterface $logger = null )
+    public function __construct(\PDO $pdo, string $fabrics_table, string $colors_table, string $fabrics_colors_table, LoggerInterface $logger = null)
     {
-        $this->setLogger( $logger ?: new NullLogger );
+        $this->setLogger($logger ?: new NullLogger());
 
         $sql = "SELECT DISTINCT
         C.id,
@@ -53,7 +52,7 @@ class PdoCollectionColors
         OR F.collection_name = :collection_name";
 
 
-        $this->stmt = $pdo->prepare( $sql );
+        $this->stmt = $pdo->prepare($sql);
     }
 
 
@@ -61,14 +60,13 @@ class PdoCollectionColors
      * @param  string $collection_name Collection nameor slug
      * @return \ArrayIterator
      */
-    public function __invoke( string $collection_name ) : iterable
+    public function __invoke(string $collection_name): iterable
     {
         $bool = $this->stmt->execute([
             ':collection_name' => $collection_name
         ]);
 
-        $fabrics = $this->stmt->fetchAll( \PDO::FETCH_ASSOC );
-        return new \ArrayIterator( $fabrics );
+        $fabrics = $this->stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return new \ArrayIterator($fabrics);
     }
-
 }
