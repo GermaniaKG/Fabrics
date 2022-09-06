@@ -1,5 +1,7 @@
 <?php
+
 namespace Germania\Fabrics;
 
-
-interface FabricExceptionInterface {}
+interface FabricExceptionInterface
+{
+}

@@ -1,11 +1,10 @@
 <?php
+
 namespace Germania\Fabrics;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Psr\Log\LoggerAwareTrait;
-
-
 
 /**
  * Fetches ALL fabrics (Stoffe) belonging to a certain collection (Kollektion).
@@ -30,9 +29,9 @@ class PdoCollectionsInUse
      * @param string               $fabrics_table
      * @param LoggerInterface|null $logger
      */
-    public function __construct( \PDO $pdo, string $fabrics_table, LoggerInterface $logger = null )
+    public function __construct(\PDO $pdo, string $fabrics_table, LoggerInterface $logger = null)
     {
-        $this->setLogger( $logger ?: new NullLogger );
+        $this->setLogger($logger ?: new NullLogger());
 
         $sql = "SELECT DISTINCT
         C.collection_slug,
@@ -44,19 +43,18 @@ class PdoCollectionsInUse
         WHERE C.enabled > 0
         GROUP BY C.collection_slug";
 
-        $this->stmt = $pdo->prepare( $sql );
+        $this->stmt = $pdo->prepare($sql);
     }
 
 
     /**
      * @return \ArrayIterator
      */
-    public function __invoke( ) : iterable
+    public function __invoke(): iterable
     {
         $bool = $this->stmt->execute();
 
-        $collections = $this->stmt->fetchAll( \PDO::FETCH_ASSOC | \PDO::FETCH_UNIQUE );
-        return new \ArrayIterator( $collections );
+        $collections = $this->stmt->fetchAll(\PDO::FETCH_ASSOC | \PDO::FETCH_UNIQUE);
+        return new \ArrayIterator($collections);
     }
-
 }

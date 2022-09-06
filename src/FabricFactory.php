@@ -1,9 +1,9 @@
 <?php
+
 namespace Germania\Fabrics;
 
 class FabricFactory implements FabricFactoryInterface
 {
-
     /**
      * FQDN of Fabric instances
      * @var string
@@ -22,22 +22,21 @@ class FabricFactory implements FabricFactoryInterface
     /**
      * Creates FabricInterface instance from array data.
      * If instance of FabricInterface is passed, that very instance will be returned.
-     * 
+     *
      * @param   \ArrayAccess|array|FabricInterface $fabric_data  Fabric raw data
      * @return  FabricInterface Fabric
      * @throws  FabricInvalidArgumentException
      */
-    public function __invoke($fabric_data) : FabricInterface
+    public function __invoke($fabric_data): FabricInterface
     {
-        if ($fabric_data instanceOf FabricInterface) {
+        if ($fabric_data instanceof FabricInterface) {
             return $fabric_data;
-        } 
-        elseif (!is_array($fabric_data) and !$fabric_data instanceOf \ArrayAccess ) {
+        } elseif (!is_array($fabric_data) and !$fabric_data instanceof \ArrayAccess) {
             throw new FabricInvalidArgumentException("FabricInterface, array or ArrayAccess expected");
         }
 
         $php_class = $this->php_class;
-        $result = new $php_class;
+        $result = new $php_class();
 
         // Object Attribute                 // from database notation ...            ... OR camelCase if existant
         $result->id                       = $fabric_data['id']                       ?? null;
