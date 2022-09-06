@@ -32,6 +32,10 @@ interface FabricInterface
         , 'roll_max_width'
         , 'fabric_max_width'
 
+        , 'repeat_width'
+        , 'repeat_height'
+        , 'repeat_type'
+
         , 'photo'
 
         , 'in_kompaktkollektion'
@@ -76,6 +80,8 @@ interface FabricInterface
     public function getFabricName();
     public function getPattern();
     public function getPleatWidth();
+
+    public function getRepeat() : ?RepeatInterface;
 
     public function getPriceGroup();
     public function getKeywords();

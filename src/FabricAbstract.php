@@ -24,6 +24,11 @@ abstract class FabricAbstract implements FabricInterface
     public $roll_max_width;
     public $fabric_max_width;
 
+    /**
+     * @var RepeatInterface|null
+     */
+    public $repeat;
+
     public $photo;
     public $in_kompaktkollektion;
 
@@ -95,6 +100,12 @@ abstract class FabricAbstract implements FabricInterface
     }
 
 
+
+
+    public function getRepeat() : ?RepeatInterface
+    {
+        return $this->repeat;
+    }
 
 
     public function getPleatWidth()
