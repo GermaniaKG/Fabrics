@@ -42,6 +42,12 @@ abstract class FabricDecoratorAbstract implements FabricInterface
     }
 
 
+    public function getRepeat() : ?RepeatInterface
+    {
+        return $this->fabric->getRepeat();
+    }
+
+
     public function getPriceGroup()
     {
         return $this->fabric->getPriceGroup();
