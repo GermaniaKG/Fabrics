@@ -50,6 +50,9 @@ class PdoCollectionFabricFinder implements FabricFactoryInterface
             return "F.$f";
         }, FabricInterface::FABRIC_FIELDS));
 
+        //
+        // Build SQL
+        //
         $sql = "SELECT
         $fabric_fields
 
