@@ -11,20 +11,13 @@ use Psr\Log\LoggerAwareTrait;
  */
 class PdoCollectionFabricFinder implements FabricFactoryInterface
 {
-    use PleatsTablesTrait;
-    use LoggerAwareTrait;
+    use PleatsTablesTrait, FabricFactoryAwareTrait, LoggerAwareTrait;
 
 
     /**
      * @var string
      */
     public $default_collection_name;
-
-
-    /**
-     * @var FQDN
-     */
-    public $php_fabric_class = Fabric::class;
 
 
     /**
@@ -43,6 +36,7 @@ class PdoCollectionFabricFinder implements FabricFactoryInterface
      */
     public function __construct(\PDO $pdo, string $default_collection_name, string $fabrics_table, string $colors_table, string $fabrics_colors_table, LoggerInterface $logger = null)
     {
+        $this->setFabricFactory( new FabricFactory );
         $this->setLogger($logger ?: new NullLogger());
         $this->default_collection_name = $default_collection_name;
 
@@ -95,7 +89,7 @@ class PdoCollectionFabricFinder implements FabricFactoryInterface
         LIMIT 1";
 
         $this->stmt = $pdo->prepare($sql);
-        $this->stmt->setFetchMode(\PDO::FETCH_CLASS, $this->php_fabric_class);
+        $this->stmt->setFetchMode(\PDO::FETCH_ASSOC);
     }
 
 
@@ -113,9 +107,10 @@ class PdoCollectionFabricFinder implements FabricFactoryInterface
             ':fabric_number' => $fabric_number
         ]);
 
-        if ($fabric = $this->stmt->fetch()):
-            return $fabric;
-        endif;
+        $fabric = $this->stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($fabric) {
+            return ($this->fabric_factory)($fabric);
+        }
 
         $msg = sprintf("Fabric number '%s' does not exists in collection '%s'.", $fabric_number, $collection_name);
         throw new FabricNotFoundException($msg);

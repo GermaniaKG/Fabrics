@@ -2,6 +2,7 @@
 namespace tests\Database;
 
 use Germania\Fabrics\PdoCollectionFabricFinder;
+use Germania\Fabrics\RepeatInterface;
 use Germania\Fabrics\FabricInterface;
 use Germania\Fabrics\FabricNotFoundException;
 use Germania\Fabrics\FabricFactoryInterface;
@@ -40,13 +41,19 @@ class PdoCollectionFabricFinderTest extends \PHPUnit\Framework\TestCase
         $result = $sut($fabric_number);
 
 		$this->assertInstanceOf(FabricInterface::class, $result);
+
+        if ($repeat = $result->getRepeat())
+        {
+            $this->assertInstanceOf(RepeatInterface::class, $repeat);
+        }
 	}
 
     public function provideExistingFabricNumbers() : array
     {
         $default = $GLOBALS['DEFAULT_FABRIC'];
         return array(
-            $default => [ $GLOBALS['DEFAULT_FABRIC'] ]
+            $default => [ $GLOBALS['DEFAULT_FABRIC'] ],
+            "4-4805" => [ "4-4805" ]
         );
     }
 

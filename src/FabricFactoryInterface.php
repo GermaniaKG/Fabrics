@@ -9,7 +9,7 @@ interface FabricFactoryInterface
      *
      * Throws FabricExceptionInterface when failing.
      *
-     * @param  mixed $fabric_data Any data neede to create a FabricInterface instance.
+     * @param  mixed $fabric_data Any data needed to create a FabricInterface instance.
      * @return FabricInterface
      * @throws FabricExceptionInterface
      */

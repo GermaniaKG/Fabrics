@@ -14,6 +14,7 @@ use Psr\Log\LoggerAwareTrait;
 class PdoCollectionFabricFuzzySearcher
 {
     use PleatsTablesTrait;
+    use FabricFactoryAwareTrait;
     use LoggerAwareTrait;
 
 
@@ -21,12 +22,6 @@ class PdoCollectionFabricFuzzySearcher
      * @var string
      */
     public $default_collection_name;
-
-
-    /**
-     * @var FQDN
-     */
-    public $php_fabric_class = Fabric::class;
 
     /**
      * @var \PDOStatement
@@ -39,6 +34,7 @@ class PdoCollectionFabricFuzzySearcher
     public function __construct(\PDO $pdo, string $default_collection_name, string $fabrics_table, string $colors_table, string $fabrics_colors_table, LoggerInterface $logger = null)
     {
         $this->setLogger($logger ?: new NullLogger());
+        $this->setFabricFactory( new FabricFactory );
         $this->default_collection_name = $default_collection_name;
 
         $fabric_fields = implode(",", array_map(function ($f) {
@@ -83,7 +79,7 @@ class PdoCollectionFabricFuzzySearcher
         GROUP BY F.id";
 
         $this->stmt = $pdo->prepare($sql);
-        $this->stmt->setFetchMode(\PDO::FETCH_CLASS, $this->php_fabric_class);
+        $this->stmt->setFetchMode(\PDO::FETCH_ASSOC);
     }
 
 
@@ -101,7 +97,12 @@ class PdoCollectionFabricFuzzySearcher
             ':search' => $search
         ]);
 
-        $fabrics = $this->stmt->fetchAll(\PDO::FETCH_UNIQUE);
+
+        $raw_fabrics = $this->stmt->fetchAll(\PDO::FETCH_UNIQUE);
+        $fabrics = array();
+        foreach($raw_fabrics as $key => $fabric) {
+            $fabrics[$key] = ($this->fabric_factory)($fabric);
+        }
 
         return empty($sort_field)
         ? new \ArrayIterator($fabrics)
