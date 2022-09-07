@@ -32,15 +32,23 @@ class PdoCollectionFabricFinderTest extends \PHPUnit\Framework\TestCase
 	}
 
 	/**
-	 * @depends testInstantiation
+	 * @dataProvider provideExistingFabricNumbers
+     * @depends testInstantiation
 	 */
-	public function testExistingFabric( $sut )
+	public function testExistingFabric( $fabric_number, $sut )
 	{
-        $fabric_number = $GLOBALS['DEFAULT_FABRIC'];
         $result = $sut($fabric_number);
 
 		$this->assertInstanceOf(FabricInterface::class, $result);
 	}
+
+    public function provideExistingFabricNumbers() : array
+    {
+        $default = $GLOBALS['DEFAULT_FABRIC'];
+        return array(
+            $default => [ $GLOBALS['DEFAULT_FABRIC'] ]
+        );
+    }
 
 	/**
 	 * @depends testInstantiation
