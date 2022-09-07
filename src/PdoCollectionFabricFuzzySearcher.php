@@ -45,6 +45,10 @@ class PdoCollectionFabricFuzzySearcher
             return "F.$f";
         }, FabricInterface::FABRIC_FIELDS));
 
+
+        //
+        // Build SQL
+        //
         $sql = "SELECT
         -- Used for array keys
         F.fabric_number,
