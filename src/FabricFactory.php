@@ -84,6 +84,14 @@ class FabricFactory implements FabricFactoryInterface
             'repeat_height' => $fabric_data['repeat_height']  ?? ($fabric_data['repeatHeight'] ?? null),
             'repeat_type'   => $fabric_data['repeat_type']    ?? ($fabric_data['repeatType'] ?? null)
         );
+        if (!empty($fabric_data['repeat']) and is_array($fabric_data['repeat'])) {
+            $repeat_data = array(
+                'repeat_width'  => $fabric_data['repeat']['width']   ?? null,
+                'repeat_height' => $fabric_data['repeat']['height']  ?? null,
+                'repeat_type'   => $fabric_data['repeat']['type']    ?? null
+            );
+        }
+
         $result->repeat = $this->createRepeatOrNull($repeat_data);
 
         $result->material                 = $fabric_data['material']                 ?? null;
