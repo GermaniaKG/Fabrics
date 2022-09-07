@@ -4,6 +4,8 @@ namespace Germania\Fabrics;
 
 class Repeat extends RepeatAbstract implements \JsonSerializable
 {
+
+    #[\ReturnTypeWillChange]
     public function __toString() {
         $width = $this->getWidth();
         $height = $this->getHeight();
@@ -27,6 +29,7 @@ class Repeat extends RepeatAbstract implements \JsonSerializable
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return array(
