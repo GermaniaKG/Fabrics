@@ -1,4 +1,5 @@
 <?php
+
 namespace Germania\Fabrics;
 
 abstract class FabricAbstract implements FabricInterface
@@ -22,6 +23,11 @@ abstract class FabricAbstract implements FabricInterface
 
     public $roll_max_width;
     public $fabric_max_width;
+
+    /**
+     * @var RepeatInterface|null
+     */
+    public $repeat;
 
     public $photo;
     public $in_kompaktkollektion;
@@ -78,11 +84,12 @@ abstract class FabricAbstract implements FabricInterface
 
 
 
-    public function getFabricNumber() {
+    public function getFabricNumber()
+    {
         return $this->fabric_number;
     }
 
-    public function getFabricName() 
+    public function getFabricName()
     {
         return $this->fabric_name;
     }
@@ -91,106 +98,115 @@ abstract class FabricAbstract implements FabricInterface
     {
         return $this->pattern;
     }
-    
 
 
 
-    public function getPleatWidth() {
+
+    public function getRepeat() : ?RepeatInterface
+    {
+        return $this->repeat;
+    }
+
+
+    public function getPleatWidth()
+    {
         return $this->pleat_width;
     }
 
 
-    public function getPriceGroup() {
+    public function getPriceGroup()
+    {
         return $this->price_group;
     }
 
-    public function getKeywords() {
+    public function getKeywords()
+    {
         return $this->keywords;
     }
 
-    public function isEnabled() : bool
+    public function isEnabled(): bool
     {
         return $this->intToBool($this->enabled);
     }
 
-    public function isAvailable() : bool
+    public function isAvailable(): bool
     {
         return $this->intToBool($this->lieferbar);
     }
 
 
 
-    public function isInKompaktKollektion() : bool
+    public function isInKompaktKollektion(): bool
     {
         return $this->intToBool($this->in_kompaktkollektion);
     }
 
 
-    public function isAvailableForPanelTracks() : bool
+    public function isAvailableForPanelTracks(): bool
     {
         return $this->intToBool($this->paneltrack);
     }
 
 
-    public function isHalogenFree() : bool
+    public function isHalogenFree(): bool
     {
         return $this->intToBool($this->halogen_free);
     }
 
-    public function isPvcFree() : bool
+    public function isPvcFree(): bool
     {
         return $this->intToBool($this->pvc_free);
     }
 
-    public function isGreenGuard() : bool
+    public function isGreenGuard(): bool
     {
         return $this->intToBool($this->green_guard);
     }
 
 
-    public function isTopar() : bool
+    public function isTopar(): bool
     {
         return $this->intToBool($this->topar);
     }
 
 
-    public function isDustblock() : bool
+    public function isDustblock(): bool
     {
         return $this->intToBool($this->dustblock);
     }
 
 
-    public function isEasyClean() : bool
+    public function isEasyClean(): bool
     {
         return $this->intToBool($this->easy_clean);
     }
 
 
-    public function isWashable() : bool
+    public function isWashable(): bool
     {
         return $this->intToBool($this->washable);
     }
 
 
-    public function isMoistRoom() : bool
+    public function isMoistRoom(): bool
     {
         return $this->intToBool($this->moist_room);
     }
 
 
-    public function isScreenSuitable() : bool
+    public function isScreenSuitable(): bool
     {
         return $this->intToBool($this->screen_suitable);
     }
 
 
-    public function isOekoTex() : bool
+    public function isOekoTex(): bool
     {
         return $this->intToBool($this->oekotex);
     }
 
 
-    public function isSeaTex() : bool
+    public function isSeaTex(): bool
     {
         return $this->intToBool($this->seatex);
     }
@@ -202,9 +218,8 @@ abstract class FabricAbstract implements FabricInterface
      * @param  mixed $var
      * @return bool
      */
-    protected function intToBool( $var ) : bool
+    protected function intToBool($var): bool
     {
-        return ((int) $var > 0);   
+        return ((int) $var > 0);
     }
-
 }

@@ -1,14 +1,19 @@
 <?php
+
 namespace Germania\Fabrics;
 
 class FabricFactory implements FabricFactoryInterface
 {
-
     /**
      * FQDN of Fabric instances
      * @var string
      */
     public $php_class;
+
+    /**
+     * @var RepeatFactoryInterface
+     */
+    protected $repeat_factory;
 
 
     /**
@@ -17,27 +22,37 @@ class FabricFactory implements FabricFactoryInterface
     public function __construct(string $php_class = null)
     {
         $this->php_class = $php_class ?: Fabric::class;
+        $this->setRepeatFactory(new RepeatFactory);
     }
+
+
+    public function setRepeatFactory( RepeatFactoryInterface $repeat_factory) : self
+    {
+        $this->repeat_factory = new RepeatFactory;
+        return $this;
+    }
+
+
 
     /**
      * Creates FabricInterface instance from array data.
      * If instance of FabricInterface is passed, that very instance will be returned.
-     * 
+     *
      * @param   \ArrayAccess|array|FabricInterface $fabric_data  Fabric raw data
      * @return  FabricInterface Fabric
      * @throws  FabricInvalidArgumentException
      */
-    public function __invoke($fabric_data) : FabricInterface
+    public function __invoke($fabric_data): FabricInterface
     {
-        if ($fabric_data instanceOf FabricInterface) {
+        if ($fabric_data instanceof FabricInterface) {
             return $fabric_data;
-        } 
+        }
         elseif (!is_array($fabric_data) and !($fabric_data instanceOf \ArrayAccess )) {
             throw new FabricInvalidArgumentException("FabricInterface, array or ArrayAccess expected");
         }
 
         $php_class = $this->php_class;
-        $result = new $php_class;
+        $result = new $php_class();
 
         // Object Attribute                 // from database notation ...            ... OR camelCase if existant
         $result->id                       = $fabric_data['id']                       ?? null;
@@ -63,6 +78,23 @@ class FabricFactory implements FabricFactoryInterface
         $result->pleat_width              = $fabric_data['pleat_width']              ?? ($fabric_data['pleatWidth'] ?? null);
         $result->thickness                = $fabric_data['thickness']                ?? null;
         $result->roll_max_width           = $fabric_data['roll_max_width']           ?? ($fabric_data['rollMaxWidth'] ?? null);
+
+
+        $repeat_data = array(
+            'repeat_width'  => $fabric_data['repeat_width']   ?? ($fabric_data['repeatWidth'] ?? null),
+            'repeat_height' => $fabric_data['repeat_height']  ?? ($fabric_data['repeatHeight'] ?? null),
+            'repeat_type'   => $fabric_data['repeat_type']    ?? ($fabric_data['repeatType'] ?? null)
+        );
+        if (!empty($fabric_data['repeat']) and is_array($fabric_data['repeat'])) {
+            $repeat_data = array(
+                'repeat_width'  => $fabric_data['repeat']['width']   ?? null,
+                'repeat_height' => $fabric_data['repeat']['height']  ?? null,
+                'repeat_type'   => $fabric_data['repeat']['type']    ?? null
+            );
+        }
+
+        $result->repeat = $this->createRepeatOrNull($repeat_data);
+
         $result->material                 = $fabric_data['material']                 ?? null;
         $result->weight                   = $fabric_data['weight']                   ?? null;
         $result->easy_clean               = $fabric_data['easy_clean']               ?? ($fabric_data['easyClean'] ?? null);
@@ -88,5 +120,21 @@ class FabricFactory implements FabricFactoryInterface
         $result->pleat_available_widths   = $fabric_data['pleat_available_widths']   ?? ($fabric_data['pleatAvailableWidths'] ?? null);
 
         return $result;
+    }
+
+    protected function createRepeatOrNull( $fabric_data ) : ?RepeatInterface
+    {
+        $repeat_data = array(
+            'repeat_width'  => $fabric_data['repeat_width']   ?? null,
+            'repeat_height' => $fabric_data['repeat_height']  ?? null,
+            'repeat_type'   => $fabric_data['repeat_type']    ?? null
+        );
+
+        if (!is_null($repeat_data['repeat_width'])
+        and !is_null($repeat_data['repeat_height'])
+        and !is_null($repeat_data['repeat_type'])) {
+            return ($this->repeat_factory)($repeat_data);
+        }
+        return null;
     }
 }

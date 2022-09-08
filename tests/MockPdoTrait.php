@@ -21,7 +21,7 @@ trait MockPdoTrait
     {
         $stmt = $this->prophesize(\PDOStatement::class);
 
-        $stmt->setFetchMode( Argument::type('integer'), Argument::type('string') )->willReturn( true );
+        $stmt->setFetchMode( Argument::type('integer'), Argument::any() )->willReturn( true );
 
         #$stmt->execute( Argument::type( 'array') )->willReturn( $execute_result );
         $stmt->execute( Argument::any() )->willReturn( $execute_result );

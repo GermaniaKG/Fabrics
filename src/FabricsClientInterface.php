@@ -1,9 +1,9 @@
 <?php
+
 namespace Germania\Fabrics;
 
 interface FabricsClientInterface
 {
-
     /**
      * Retrieve all collections in use
      */
@@ -18,7 +18,7 @@ interface FabricsClientInterface
      * @param  string|null   $sort         Optional: sort by field(s), string or CSV string
      * @return iterable|FabricInterface[]  Iterable with FabricInterface instances
      */
-    public function collection( string $collection, string $search = null, string $sort = null) : iterable;
+    public function collection(string $collection, string $search = null, string $sort = null): iterable;
 
 
     /**
@@ -27,7 +27,7 @@ interface FabricsClientInterface
      * @param  string        $collection   URL slug of a Germania Fabrics Collection
      * @return iterable|FabricInterface[]  Iterable with FabricInterface instances
      */
-    public function collectionTransparencies( string $collection) : iterable;
+    public function collectionTransparencies(string $collection): iterable;
 
 
     /**
@@ -36,7 +36,7 @@ interface FabricsClientInterface
      * @param  string        $collection   URL slug of a Germania Fabrics Collection
      * @return iterable|FabricInterface[]  Iterable with FabricInterface instances
      */
-    public function collectionColors( string $collection) : iterable;
+    public function collectionColors(string $collection): iterable;
 
 
     /**
@@ -46,5 +46,5 @@ interface FabricsClientInterface
      * @param  string $fabric_number  Fabric number
      * @return FabricInterface
      */
-    public function fabric( string $collection, string $fabric_number ) : FabricInterface;
+    public function fabric(string $collection, string $fabric_number): FabricInterface;
 }

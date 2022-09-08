@@ -1,4 +1,5 @@
 <?php
+
 namespace Germania\Fabrics;
 
 class SameValueFilterIterator extends \FilterIterator{
@@ -29,22 +30,23 @@ class SameValueFilterIterator extends \FilterIterator{
         $this->search = $search;
         $this->strict = $strict;
 
-        parent::__construct( new \IteratorIterator($fabrics));
+        parent::__construct(new \IteratorIterator($fabrics));
     }
 
-    public function accept( ) : bool
+    public function accept(): bool
     {
         $fabric = $this->current();
 
 
         if (is_array($fabric)
-        or $fabric instanceOf \ArrayAccess)
-            return $this->strict 
+        or $fabric instanceof \ArrayAccess) {
+            return $this->strict
                 ? $fabric[ $this->field ] === $this->search
                 : $fabric[ $this->field ] == $this->search;
+        }
 
         if (is_object($fabric) and isset($fabric->{$this->field})):
-            return  $this->strict 
+            return  $this->strict
                 ? $fabric->{$this->field} === $this->search
                 : $fabric->{$this->field} == $this->search;
         endif;

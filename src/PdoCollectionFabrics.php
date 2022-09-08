@@ -1,11 +1,10 @@
 <?php
+
 namespace Germania\Fabrics;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Psr\Log\LoggerAwareTrait;
-
-
 
 /**
  * Fetches ALL fabrics (Stoffe) belonging to a certain collection (Kollektion).
@@ -14,8 +13,9 @@ use Psr\Log\LoggerAwareTrait;
  */
 class PdoCollectionFabrics
 {
-    use PleatsTablesTrait,
-        LoggerAwareTrait;
+    use PleatsTablesTrait;
+    use FabricFactoryAwareTrait;
+    use LoggerAwareTrait;
 
 
     /**
@@ -36,12 +36,19 @@ class PdoCollectionFabrics
      * @param string               $fabrics_colors_table
      * @param LoggerInterface|null $logger
      */
-    public function __construct( \PDO $pdo, string $fabrics_table, string $colors_table, string $fabrics_colors_table, LoggerInterface $logger = null )
+    public function __construct(\PDO $pdo, string $fabrics_table, string $colors_table, string $fabrics_colors_table, LoggerInterface $logger = null)
     {
-        $this->setLogger( $logger ?: new NullLogger );
+        $this->setLogger($logger ?: new NullLogger());
+        $this->setFabricFactory( new FabricFactory );
 
-        $fabric_fields = implode(",", array_map(function($f) { return "F.$f"; }, FabricInterface::FABRIC_FIELDS));
+        $fabric_fields = implode(",", array_map(function ($f) {
+            return "F.$f";
+        }, FabricInterface::FABRIC_FIELDS));
 
+
+        //
+        // Build SQL
+        //
         $sql = "SELECT
         -- Used for array keys
         F.fabric_number,
@@ -66,8 +73,8 @@ class PdoCollectionFabrics
 
         GROUP BY F.id";
 
-        $this->stmt = $pdo->prepare( $sql );
-        $this->stmt->setFetchMode( \PDO::FETCH_CLASS, $this->php_fabric_class );
+        $this->stmt = $pdo->prepare($sql);
+        $this->stmt->setFetchMode(\PDO::FETCH_ASSOC);
     }
 
 
@@ -78,18 +85,20 @@ class PdoCollectionFabrics
      *
      * @return \ArrayIterator
      */
-    public function __invoke( string $collection_name, string $sort_field = null ) : iterable
+    public function __invoke(string $collection_name, string $sort_field = null): iterable
     {
         $bool = $this->stmt->execute([
             ':collection_name' => $collection_name
         ]);
 
-        $fabrics = $this->stmt->fetchAll( \PDO::FETCH_UNIQUE );
-
+        $raw_fabrics = $this->stmt->fetchAll(\PDO::FETCH_UNIQUE);
+        $fabrics = array();
+        foreach($raw_fabrics as $key => $fabric) {
+            $fabrics[$key] = ($this->fabric_factory)($fabric);
+        }
 
         return empty($sort_field)
-        ? new \ArrayIterator( $fabrics )
+        ? new \ArrayIterator($fabrics)
         : SortedArrayIterator::fromArray($fabrics, $sort_field);
     }
-
 }

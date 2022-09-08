@@ -46,8 +46,8 @@
 	"scripts": {
     "phpstan": "phpstan analyse --configuration phpstan.neon",
 		"phpcs":       "php-cs-fixer fix --verbose --diff --dry-run src/",
-		"phpcs-apply": "php-cs-fixer fix --verbose --diff src/",
-		"phpunit": "phpunit --colors=auto --coverage-text",
+		"phpcs:apply": "php-cs-fixer fix --verbose --diff src/",
+		"phpunit": "phpunit --coverage-text",
 		"watch": "phpunit-watcher watch",
 		"test": [
 			"@phpcs",

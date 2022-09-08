@@ -1,4 +1,5 @@
 <?php
+
 namespace Germania\Fabrics;
 
 use Psr\Log\LoggerInterface;
@@ -70,14 +71,14 @@ class PdoFabricsClient implements FabricsClientInterface
      * @param string               $fabrics_colors_table Fabrics and Colors assigments table
      * @param LoggerInterface|null $logger               Optional: PSR-3 Logger
      */
-    public function __construct( \PDO $pdo, string $fabrics_table, string $colors_table, string $fabrics_colors_table, LoggerInterface $logger = null )
+    public function __construct(\PDO $pdo, string $fabrics_table, string $colors_table, string $fabrics_colors_table, LoggerInterface $logger = null)
     {
         $this->pdo = $pdo;
         $this->fabrics_table = $fabrics_table;
         $this->colors_table = $colors_table;
         $this->fabrics_colors_table = $fabrics_colors_table;
 
-        $this->setLogger( $logger ?: new NullLogger );
+        $this->setLogger($logger ?: new NullLogger());
     }
 
 
@@ -87,7 +88,7 @@ class PdoFabricsClient implements FabricsClientInterface
      *
      * @inheritDoc
      */
-    public function collections() : iterable
+    public function collections(): iterable
     {
         $collections_in_use_reader = $this->getCollectionsInUseReader();
         return $collections_in_use_reader();
@@ -99,7 +100,7 @@ class PdoFabricsClient implements FabricsClientInterface
      *
      * @inheritDoc
      */
-    public function collection( string $collection, string $search = null, string $sort = null) : iterable
+    public function collection(string $collection, string $search = null, string $sort = null): iterable
     {
         if (empty($search)) {
             $collection_reader = $this->getCollectionReader();
@@ -116,11 +117,10 @@ class PdoFabricsClient implements FabricsClientInterface
      *
      * @inheritDoc
      */
-    public function collectionTransparencies( string $collection) : iterable
+    public function collectionTransparencies(string $collection): iterable
     {
         $transparencies_reader = $this->getTransparenciesReader();
         return $transparencies_reader($collection);
-
     }
 
 
@@ -129,7 +129,7 @@ class PdoFabricsClient implements FabricsClientInterface
      *
      * @inheritDoc
      */
-    public function collectionColors( string $collection) : iterable
+    public function collectionColors(string $collection): iterable
     {
         $colors_reader = $this->getColorsReader();
         return $colors_reader($collection);
@@ -141,7 +141,7 @@ class PdoFabricsClient implements FabricsClientInterface
      *
      * @inheritDoc
      */
-    public function fabric( string $collection, string $fabric_number ) : FabricInterface
+    public function fabric(string $collection, string $fabric_number): FabricInterface
     {
         $fabric_finder = $this->getFabricFinder();
         return $fabric_finder($fabric_number, $collection);
@@ -152,7 +152,7 @@ class PdoFabricsClient implements FabricsClientInterface
 
 
 
-    protected function getTransparenciesReader() : PdoCollectionTransparencies
+    protected function getTransparenciesReader(): PdoCollectionTransparencies
     {
         if (!$this->transparencies_reader):
             $this->transparencies_reader = new PdoCollectionTransparencies(
@@ -166,7 +166,7 @@ class PdoFabricsClient implements FabricsClientInterface
     }
 
 
-    protected function getColorsReader() : PdoCollectionColors
+    protected function getColorsReader(): PdoCollectionColors
     {
         if (!$this->colors_reader):
             $this->colors_reader = new PdoCollectionColors(
@@ -183,7 +183,7 @@ class PdoFabricsClient implements FabricsClientInterface
 
 
 
-    protected function getFabricFinder() : PdoCollectionFabricFinder
+    protected function getFabricFinder(): PdoCollectionFabricFinder
     {
         if (!$this->fabric_finder):
             $this->fabric_finder = new PdoCollectionFabricFinder(
@@ -200,7 +200,7 @@ class PdoFabricsClient implements FabricsClientInterface
     }
 
 
-    protected function getCollectionsInUseReader() : PdoCollectionsInUse
+    protected function getCollectionsInUseReader(): PdoCollectionsInUse
     {
         if (!$this->collections_in_use_reader):
             $this->collections_in_use_reader = new PdoCollectionsInUse(
@@ -214,7 +214,7 @@ class PdoFabricsClient implements FabricsClientInterface
     }
 
 
-    protected function getCollectionReader() : PdoCollectionFabrics
+    protected function getCollectionReader(): PdoCollectionFabrics
     {
         if (!$this->collection_reader):
             $this->collection_reader = new PdoCollectionFabrics(
@@ -230,7 +230,7 @@ class PdoFabricsClient implements FabricsClientInterface
     }
 
 
-    protected function getCollectionSearcher() : PdoCollectionFabricFuzzySearcher
+    protected function getCollectionSearcher(): PdoCollectionFabricFuzzySearcher
     {
         if (!$this->collection_searcher):
             $this->collection_searcher = new PdoCollectionFabricFuzzySearcher(

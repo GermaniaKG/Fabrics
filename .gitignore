@@ -49,4 +49,5 @@ tests/logs
 phpunit.xml
 .php_cs*
 .phpunit.result.cache
+.php-cs-fixer.cache
 
