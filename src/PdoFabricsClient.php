@@ -61,7 +61,7 @@ class PdoFabricsClient implements FabricsClientInterface
 
 
     /**
-     * Retrieve all collections in used
+     * Retrieve all collections in use
      *
      * @inheritDoc
      */
