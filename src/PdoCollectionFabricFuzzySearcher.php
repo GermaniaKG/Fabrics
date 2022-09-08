@@ -24,7 +24,7 @@ class PdoCollectionFabricFuzzySearcher
 
 
     /**
-     * @var FQDN
+     * @var string
      */
     public $php_fabric_class = Fabric::class;
 

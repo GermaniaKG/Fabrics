@@ -12,7 +12,7 @@ abstract class FabricDecoratorAbstract implements FabricInterface
 
 
     /**
-     * @param FabricInterface $document The fabric instance to decorate
+     * @param FabricInterface $fabric The fabric instance to decorate
      */
     public function __construct(FabricInterface $fabric)
     {

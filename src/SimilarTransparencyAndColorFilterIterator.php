@@ -5,6 +5,8 @@ class SimilarTransparencyAndColorFilterIterator extends \FilterIterator{
 
     public $transparency;
     public $color;
+    public $color_array;
+    public $strict;
 
     public $transparency_field = "fabric_transparency";
     public $transparency_field_cc = "fabricTransparency";

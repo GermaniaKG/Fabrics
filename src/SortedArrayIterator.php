@@ -1,7 +1,7 @@
 <?php
 namespace Germania\Fabrics;
 
-class SortedArrayIterator extends \ArrayIterator
+final class SortedArrayIterator extends \ArrayIterator
 {
 
 
