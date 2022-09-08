@@ -5,7 +5,14 @@ trait PleatsTablesTrait
 {
 
 
+    /**
+     * @var string
+     */
     public $pleats_table         = "germania_pleatwidths";
+
+    /**
+     * @var string
+     */
     public $fabrics_pleats_table = "germania_fabrics_pleatwidths";
 
 

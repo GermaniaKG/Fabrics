@@ -1,10 +1,22 @@
 # phpstan.neon
 
+
+
 parameters:
-    level: 2
+
+    level: 6
+
+    checkGenericClassInNonGenericObjectType: false
+
     paths:
         - src
         # - tests
 
-    ignoreErrors: []
+    ignoreErrors:
+        -
+          message: '#Result of && is always false.#'
+          path: src/FabricFactory.php
 
+        -
+          message: '#Elseif condition is always false.#'
+          path: src/FabricFactory.php

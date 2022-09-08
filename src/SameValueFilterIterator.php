@@ -3,10 +3,26 @@ namespace Germania\Fabrics;
 
 class SameValueFilterIterator extends \FilterIterator{
 
+    /**
+     * @var string
+     */
     public $field;
+
+    /**
+     * @var string
+     */
     public $search;
+
+    /**
+     * @var bool
+     */
     public $strict = false;
 
+
+
+    /**
+     * @param \Traversable<mixed[]|object> $fabrics
+     */
     public function __construct( \Traversable $fabrics, string $field, string $search, bool $strict = false )
     {
         $this->field = $field;

@@ -32,7 +32,7 @@ class FabricFactory implements FabricFactoryInterface
         if ($fabric_data instanceOf FabricInterface) {
             return $fabric_data;
         } 
-        elseif (!is_array($fabric_data) and !$fabric_data instanceOf \ArrayAccess ) {
+        elseif (!is_array($fabric_data) and !($fabric_data instanceOf \ArrayAccess )) {
             throw new FabricInvalidArgumentException("FabricInterface, array or ArrayAccess expected");
         }
 
