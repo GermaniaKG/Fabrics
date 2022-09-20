@@ -32,12 +32,34 @@ class PdoFabricsClient implements FabricsClientInterface
     public $fabrics_colors_table;
 
 
-
+    /**
+     * @var PdoCollectionFabricFinder|null
+     */
     protected $fabric_finder;
+
+    /**
+     * @var PdoCollectionFabrics|null
+     */
     protected $collection_reader;
+
+    /**
+     * @var PdoCollectionsInUse|null
+     */
     protected $collections_in_use_reader;
+
+    /**
+     * @var PdoCollectionFabricFuzzySearcher|null
+     */
     protected $collection_searcher;
+
+    /**
+     * @var PdoCollectionColors|null
+     */
     protected $colors_reader;
+
+    /**
+     * @var PdoCollectionTransparencies|null
+     */
     protected $transparencies_reader;
 
 
@@ -62,7 +84,7 @@ class PdoFabricsClient implements FabricsClientInterface
 
 
     /**
-     * Retrieve all collections in used
+     * Retrieve all collections in use
      *
      * @inheritDoc
      */

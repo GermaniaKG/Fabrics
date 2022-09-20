@@ -2,16 +2,49 @@
 
 namespace Germania\Fabrics;
 
-class SimilarTransparencyAndColorFilterIterator extends \FilterIterator
-{
+class SimilarTransparencyAndColorFilterIterator extends \FilterIterator{
+
+    /**
+     * @var string
+     */
     public $transparency;
+
+    /**
+     * @var string
+     */
     public $color;
 
+    /**
+     * @var string[]
+     */
+    public $color_array;
+
+    /**
+     * @var bool
+     */
+    public $strict;
+
+
+    /**
+     * @var string
+     */
     public $transparency_field = "fabric_transparency";
+
+    /**
+     * @var string
+     */
     public $transparency_field_cc = "fabricTransparency";
+
+    /**
+     * @var string
+     */
     public $color_field = "colors";
 
-    public function __construct(\Traversable $fabrics, string $transparency, string $color, bool $strict = false)
+
+    /**
+     * @param \Traversable<mixed[]|object> $fabrics
+     */
+    public function __construct( \Traversable $fabrics, string $transparency, string $color, bool $strict = false )
     {
         $this->transparency = $transparency;
         $this->color = $color;
@@ -52,8 +85,5 @@ class SimilarTransparencyAndColorFilterIterator extends \FilterIterator
         $same_transparency = ($ft == $this->transparency);
 
         return $same_transparency and $same_color;
-
-
-        return false;
     }
 }

@@ -5,6 +5,12 @@ namespace Germania\Fabrics;
 interface FabricsClientInterface
 {
     /**
+     * Retrieve all collections in use
+     */
+    public function collections() : iterable;
+
+
+    /**
      * Retrieve all fabrics belonging to the given collection.
      *
      * @param  string        $collection   URL slug of a Germania Fabrics Collection

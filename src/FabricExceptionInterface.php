@@ -2,6 +2,5 @@
 
 namespace Germania\Fabrics;
 
-interface FabricExceptionInterface
-{
-}
+
+interface FabricExceptionInterface extends \Throwable {}

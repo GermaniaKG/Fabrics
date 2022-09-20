@@ -2,8 +2,12 @@
 
 namespace Germania\Fabrics;
 
-class PhotoNotEmptyFilterIterator extends \FilterIterator
-{
+class PhotoNotEmptyFilterIterator extends \FilterIterator{
+
+
+    /**
+     * @var string
+     */
     public $field = 'photo';
 
 

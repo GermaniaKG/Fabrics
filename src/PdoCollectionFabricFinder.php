@@ -21,6 +21,12 @@ class PdoCollectionFabricFinder implements FabricFactoryInterface
 
 
     /**
+     * @var string
+     */
+    public $php_fabric_class = Fabric::class;
+
+
+    /**
      * @var \PDOStatement
      */
     public $stmt;
@@ -61,7 +67,7 @@ class PdoCollectionFabricFinder implements FabricFactoryInterface
         FROM $fabrics_table F
 
 
-        -- Make it filterable: 
+        -- Make it filterable:
         -- Concat assigned color names with space character
         LEFT JOIN
         (
@@ -69,10 +75,10 @@ class PdoCollectionFabricFinder implements FabricFactoryInterface
             FC.fabric_id,
             GROUP_CONCAT(C.slug SEPARATOR ' ') AS colors
             FROM $fabrics_colors_table FC
-            
-            LEFT JOIN $colors_table C 
+
+            LEFT JOIN $colors_table C
             ON C.id = FC.color_id
-            
+
             GROUP BY FC.fabric_id
 
         ) MMM

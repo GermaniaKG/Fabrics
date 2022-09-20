@@ -2,16 +2,24 @@
 
 namespace Germania\Fabrics;
 
-class SortedArrayIterator extends \ArrayIterator
+final class SortedArrayIterator extends \ArrayIterator
 {
-    public static function fromIterator(\Traversable $items, string $field, bool $ascending = true)
+
+
+    /**
+     * @param  \Traversable<mixed[]> $items
+     */
+    public static function fromIterator( \Traversable $items, string $field, bool $ascending = true) : SortedArrayIterator
     {
         $items = iterator_to_array(new \IteratorIterator($items));
         return static::fromArray($items, $field, $ascending);
     }
 
 
-    public static function fromIterable(iterable $items, string $field, bool $ascending = true)
+    /**
+     * @param iterable<mixed[]> $items
+     */
+    public static function fromIterable( iterable $items, string $field, bool $ascending = true) : SortedArrayIterator
     {
         if ($items instanceof \Traversable) {
             return static::fromIterator($items, $field, $ascending);
@@ -23,7 +31,10 @@ class SortedArrayIterator extends \ArrayIterator
     }
 
 
-    public static function fromArray(array $items, string $field, bool $ascending = true)
+    /**
+     * @param array<mixed[]> $items
+     */
+    public static function fromArray( array $items, string $field, bool $ascending = true) : SortedArrayIterator
     {
         $sorted = new static($items);
         $sorted->uasort(function ($a, $b) use ($field, $ascending) {

@@ -52,7 +52,8 @@ class FabricFactoryTest extends  \PHPUnit\Framework\TestCase
 	{
 		return array(
 			"with fabric_number" => [ array('fabric_number' => '1-2345') ],
-            "with fabricNumber" => [ array('fabricNumber' => '1-2345') ],
+            "with fabricNumber, plain array" => [ array('fabricNumber' => '1-2345') ],
+            "with fabricNumber, ArrayObject" => [ new \ArrayObject(array('fabricNumber' => '1-2345')) ],
 			"Fabric instance mock" => [ ($this->prophesize( Fabric::class ))->reveal() ],
 			"FabricInterface mock" =>[ ($this->prophesize( FabricInterface::class ))->reveal() ],
 		);

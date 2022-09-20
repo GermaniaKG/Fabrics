@@ -23,6 +23,12 @@ class PdoCollectionFabricFuzzySearcher
      */
     public $default_collection_name;
 
+
+    /**
+     * @var string
+     */
+    public $php_fabric_class = Fabric::class;
+
     /**
      * @var \PDOStatement
      */
