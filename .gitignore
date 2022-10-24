@@ -46,6 +46,7 @@ _schrott
 vendor
 var/*
 tests/logs
+tests/build
 phpunit.xml
 .php_cs*
 .phpunit.result.cache
