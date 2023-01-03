@@ -15,18 +15,15 @@ class Repeat extends RepeatAbstract implements \JsonSerializable
             return "";
         }
 
-        if (!is_null($width)
-        and !is_null($height)) {
-            return sprintf("%s×%s", $width, $height);
-        }
-
-        if (!is_null($width)) {
+        if (is_null($height)) {
             return sprintf("%s wide", $width);
         }
 
-        if (!is_null($height)) {
+        if (is_null($width)) {
             return sprintf("%s high", $height);
         }
+
+        return sprintf("%s×%s", $width, $height);
     }
 
     #[\ReturnTypeWillChange]

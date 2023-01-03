@@ -5,12 +5,12 @@ namespace Germania\Fabrics;
 abstract class RepeatAbstract implements RepeatInterface
 {
     /**
-     * @var int|null
+     * @var null|int
      */
     public $repeat_width;
 
     /**
-     * @var int|null
+     * @var null|int
      */
     public $repeat_height;
     

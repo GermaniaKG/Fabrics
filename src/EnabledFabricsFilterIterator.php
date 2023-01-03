@@ -4,6 +4,10 @@ namespace Germania\Fabrics;
 
 class EnabledFabricsFilterIterator extends \FilterIterator
 {
+
+    /**
+     * @var string
+     */
     public $field = 'enabled';
 
     public function accept(): bool
