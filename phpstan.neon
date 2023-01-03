@@ -4,7 +4,7 @@
 
 parameters:
 
-    level: 6
+    level: 4
 
     checkGenericClassInNonGenericObjectType: false
 
@@ -13,10 +13,14 @@ parameters:
         # - tests
 
     ignoreErrors:
-        -
-          message: '#Result of && is always false.#'
+        - message: '#Result of && is always false.#'
           path: src/FabricFactory.php
 
-        -
-          message: '#Elseif condition is always false.#'
+        - message: '#Result of && is always false.#'
+          path: src/RepeatFactory.php
+
+        - message: '#Elseif condition is always false.#'
           path: src/FabricFactory.php
+
+        - message: '#Elseif condition is always false.#'
+          path: src/RepeatFactory.php

@@ -7,6 +7,8 @@
 
 # Germania KG · Fabrics
 
+[![PHP Composer](https://github.com/GermaniaKG/Fabrics/actions/workflows/php.yml/badge.svg)](https://github.com/GermaniaKG/Fabrics/actions/workflows/php.yml)
+
 ## Installation
 
 ```bash
