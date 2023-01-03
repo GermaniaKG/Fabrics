@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   phpunit:
-    name: Tests
+    name: PhpUnit
     runs-on: ubuntu-latest
 
     strategy:
