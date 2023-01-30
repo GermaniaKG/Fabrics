@@ -12,7 +12,7 @@
 ## Installation
 
 ```bash
-$ composer require germania/fabrics "^5.0"
+$ composer require germania-kg/fabrics "^5.0"
 ```
 
 ## Interfaces and classes
