@@ -7,7 +7,7 @@
 
 # Germania KG · Fabrics
 
-[![PHP Composer](https://github.com/GermaniaKG/Fabrics/actions/workflows/php.yml/badge.svg)](https://github.com/GermaniaKG/Fabrics/actions/workflows/php.yml)
+[![Packagist](https://img.shields.io/packagist/v/germania-kg/fabrics.svg?style=flat)](https://packagist.org/packages/germania-kg/fabrics) [![PHP version](https://img.shields.io/packagist/php-v/germania-kg/fabrics.svg)](https://packagist.org/packages/germania-kg/fabrics) [![PHP Composer](https://github.com/GermaniaKG/Fabrics/actions/workflows/php.yml/badge.svg)](https://github.com/GermaniaKG/Fabrics/actions/workflows/php.yml)
 
 ## Installation
 
